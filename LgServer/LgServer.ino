@@ -1,9 +1,7 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include "aWOT.h"
-
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+#include "env.h"
 
 WiFiServer server(80);
 WebApp app;
