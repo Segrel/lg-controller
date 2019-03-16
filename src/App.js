@@ -5,12 +5,13 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.setId = 1;
+    this.setId = '01';
     this.targetState = {};
     this.commandQueue = [];
     this.inflight = false;
-    this.state = { isOn: false, volume: 0, screenMute: false, error: '' };
-    this.pushStateTimeout = undefined;
+    this.state = { isOn: false, volume: 0, audioMute: false, screenMute: false, error: '' };
+    this.pushStateTimer = false;
+    this.pushStateTimerHandle = undefined;
     this.errorTimeout = undefined;
   }
 
@@ -55,54 +56,74 @@ class App extends Component {
       return this.setError(error);
     }
 
-    if (command === 'kf') {
+    if (command === 'f') {
       return this.setState({ volume: parseInt(value, 16) });
     }
 
-    if (command === 'ka') {
+    if (command === 'a') {
       const isOn = Boolean(parseInt(value, 16));
-      if (isOn) {
-        this.setTargetState('kf', 'ff');
-      } else {
-        this.setState({ volume: 0 });
+      if (isOn && !this.state.volume) {
+        setTimeout(() => this.setTargetState('kf', 'ff'), 10000);
       }
       return this.setState({ isOn });
     }
 
-    if (command === 'kd') {
+    if (command === 'd') {
       const screenMute = Boolean(parseInt(value, 16));
       return this.setState({ screenMute });
+    }
+
+    if (command === 'e') {
+      const audioMute = Boolean(parseInt(value, 16));
+      return this.setState({ audioMute });
     }
   }
 
   setTargetState(command, value) {
     const commandInQueue = Boolean(this.commandQueue.indexOf(command) !== -1);
 
+    if (this.targetState[command] === value) {
+      return;
+    }
+    this.targetState[command] = value;
+
     if (commandInQueue && value === 'ff') {
       return;
     }
-
     if (!commandInQueue) {
       this.commandQueue.push(command);
     }
-    this.targetState[command] = value;
-    this.pushState();
+
+    if (!this.pushStateTimer) {
+      this.pushStateTimer = true;
+      this.pushStateTimerHandle = setTimeout(() => {
+        this.pushStateTimer = false;
+        this.pushState();
+      }, 500);
+    }
   }
 
   pushState() {
-    if (this.commandQueue.length === 0) {
-      return;
-    }
     if (this.inflight) {
-      clearTimeout(this.pushStateTimeout);
-      this.pushStateTimeout = setTimeout(() => this.pushState(), 10);
+      if (!this.pushStateTimer) {
+        this.pushStateTimer = true;
+        this.pushStateTimerHandle = setTimeout(() => {
+          this.pushStateTimer = false;
+          this.pushState();
+        }, 500);
+      }
       return;
     }
     this.inflight = true;
+
+    if (this.commandQueue.length === 0) {
+      return;
+    }
     const command = this.commandQueue.shift();
     const body = `${command} ${this.setId} ${this.targetState[command]}\r`;
+
     fetch('/command', { method: 'POST', body })
-      .then(async (response) => {
+      .then(response => {
         if (!response.ok) {
           throw new Error("Something went wrong.");
         }
@@ -116,7 +137,7 @@ class App extends Component {
   }
 
   render() {
-    const { isOn, volume, screenMute, error } = this.state;
+    const { isOn, volume, audioMute, screenMute, error } = this.state;
 
     return (
       <Container className="App position-absolute mb-5">
@@ -132,27 +153,30 @@ class App extends Component {
           <Form.Group>
             <InputGroup>
               <InputGroup.Prepend>
-                <InputGroup.Text>🔈</InputGroup.Text>
+                <InputGroup.Text onClick={() => this.setTargetState('ke', audioMute ? '00' : '01')}>{audioMute ? '🔇' : '🔈'}</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control disabled={!isOn} type="range" className="custom-range" onChange={(event) => this.setTargetState('kf', parseInt(event.target.value, 10).toString(16))} min="0" max="32" step="1" value={volume} />
+              <InputGroup.Append>
+                <InputGroup.Text>{volume}</InputGroup.Text>
+              </InputGroup.Append>
             </InputGroup>
           </Form.Group>
         </Form>
 
         <Row>
           <Col>
-            <Button variant="secondary" size="lg" onClick={() => this.setTargetState('ka', '00')}>
+            <Button variant={isOn ? 'primary' : 'secondary'} size="lg" onClick={() => this.setTargetState('ka', '00')}>
               Off
             </Button>
           </Col>
           <Col>
-            <Button variant="primary" size="lg" onClick={() => this.setTargetState('ka', '01')}>
+            <Button variant={isOn ? 'secondary' : 'primary'} size="lg" onClick={() => this.setTargetState('ka', '01')}>
               On
             </Button>
           </Col>
           <Col>
-            <Button variant="dark" size="lg" disabled={!isOn} onClick={() => this.setTargetState('kd', screenMute ? '00' : '01')}>
-              Blank
+            <Button variant={isOn ? 'primary' : 'secondary'} size="lg" disabled={!isOn} onClick={() => this.setTargetState('kd', screenMute ? '00' : '01')}>
+              {screenMute ? 'Picture' : 'Blank'}
             </Button>
           </Col>
         </Row>

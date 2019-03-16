@@ -14,31 +14,37 @@ app
     req.command = parts[0];
     req.setId = parts[1];
     req.value = parts[2].trim();
-    next();
+    setTimeout(() => next(), 500);
   })
   .post(function ({ command, setId, value }, res) {
     switch (command) {
       case 'ka':
         if ('01' == value) {
-          response = `ka ${setId} OK1x`;
+          response = `a ${setId} OK1x`;
         } else {
-          response = `ka ${setId} OK0x`;
+          response = `a ${setId} OK0x`;
         }
         break;
       case 'kf':
         if ('ff' == value) {
-          response = `kf ${setId} OK11x`;
+          response = `f ${setId} OK11x`;
         } else {
-          response = `kf ${setId} OK${value}x`;
+          response = `f ${setId} OK${value}x`;
         }
         break;
       case 'kd':
         if ('ff' == value) {
-          response = `kd ${setId} OK00x`;
+          response = `d ${setId} OK00x`;
         } else {
-          response = `kd ${setId} OK${value}x`;
+          response = `d ${setId} OK${value}x`;
         }
         break;
+      case 'ke':
+        if ('ff' == value) {
+          response = `e ${setId} OK00x`
+        } else {
+          response = `e ${setId} OK${value}x`;
+        }
     }
     return res.send(response + '\n\r');
   });
