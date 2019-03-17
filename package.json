@@ -30,9 +30,10 @@
     "awot-scripts": "0.0.24",
     "body-parser": "1.18.3",
     "express": "4.16.4",
+    "morgan": "1.9.1",
     "node-sass": "4.11.0"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://10.0.1.3:5000",
   "awot-static": {
     "sources": "./build",
     "indexFile": "index.html",

@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const app = express();
+app.use(morgan('tiny'));
 app.use(bodyParser.text());
 
 app
@@ -14,7 +16,7 @@ app
     req.command = parts[0];
     req.setId = parts[1];
     req.value = parts[2].trim();
-    setTimeout(() => next(), 500);
+    setTimeout(() => next(), 250);
   })
   .post(function ({ command, setId, value }, res) {
     switch (command) {
@@ -36,7 +38,7 @@ app
         if ('ff' == value) {
           response = `d ${setId} OK00x`;
         } else {
-          response = `d ${setId} OK${value}x`;
+          response = `d ${setId} NG${value}x`;
         }
         break;
       case 'ke':
