@@ -5,5 +5,10 @@ $custom-range-thumb-height: 5rem;
 $input-disabled-bg:                 $gray-900;
 $input-group-addon-bg:              $gray-900;
 
+$enable-shadows: false;
+$input-focus-bg: $gray-900;
+$input-focus-border-color: $input-border-color;
+$input-focus-box-shadow: none;
+
 @import '~bootstrap/scss/bootstrap.scss';
 @import "~bootswatch/dist/darkly/_bootswatch.scss";
