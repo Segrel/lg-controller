@@ -1,31 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .controls {
   bottom: 0;
-}
-
-.inflight {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-}
-.inflight:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: inflight 1.2s linear infinite;
-}
-@keyframes inflight {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Fade } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './App.css';
 import TV from './tv';
 import ErrorBar from './ErrorBar';
+import Inflight from './Inflight';
 import VolumeBar from './VolumeBar';
 import PowerBar from './PowerBar';
 
@@ -43,14 +44,12 @@ class App extends Component {
     } = this.state;
 
     return (
-      <Container className="App m-0 p-0">
-        <ErrorBar error={error} />
+      <Container className="text-center m-0 p-0">
+        <ErrorBar className="fixed-top p-1" error={error} />
 
-        <Container className="controls position-absolute mb-5">
-          <Fade in={inflight}>
-            <div className="inflight mb-4"></div>
-          </Fade>
+        <Inflight className="mt-4" inflight={inflight} />
 
+        <Container className="controls position-absolute p-4">
           <VolumeBar
             volume={volume}
             onVolumeChange={(volume) => this.tv.setTargetState('kf', parseInt(volume, 10).toString(16))}

@@ -6,7 +6,7 @@ class ErrorBar extends Component {
     const { error } = this.props;
 
     return (
-      <Row className="mt-4 mx-1 fixed-top text-center">
+      <Row className={this.props.className}>
         <Fade in={error !== ''}>
           <Col>
             <Alert variant="danger">{error}</Alert>

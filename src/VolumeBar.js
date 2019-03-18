@@ -39,7 +39,7 @@ class VolumeBar extends Component {
     }
 
     return (
-        <Form className="my-4">
+        <Form>
           <Form.Group>
             <InputGroup>
               <InputGroup.Prepend>
