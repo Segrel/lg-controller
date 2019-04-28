@@ -43,10 +43,18 @@ app
         break;
       case 'ke':
         if ('ff' == value) {
-          response = `e ${setId} OK00x`
+          response = `e ${setId} OK00x`;
         } else {
           response = `e ${setId} OK${value}x`;
         }
+        break;
+      case 'kh':
+        if ('ff' == value) {
+          response = `h ${setId} OK10x`;
+        } else {
+          response = `h ${setId} OK${value}x`;
+        }
+        break;
     }
     return res.send(response + '\n\r');
   });
