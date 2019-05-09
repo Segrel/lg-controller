@@ -6,6 +6,7 @@ import ErrorBar from './ErrorBar';
 import Inflight from './Inflight';
 import VolumeBar from './VolumeBar';
 import PowerBar from './PowerBar';
+import BrightnessBar from './BrightnessBar';
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
       onInFlightStatusChange: (inflight) => this.setState({ inflight }),
     });
     this.state = {
+      brightness: 0,
       powerOn: false,
       screenMute: false,
       volume: 0,
@@ -39,6 +41,7 @@ class App extends Component {
       screenMute,
       volume,
       audioMute,
+      brightness,
       inflight,
       error
     } = this.state;
@@ -50,6 +53,12 @@ class App extends Component {
         <Inflight className="mt-4" inflight={inflight} />
 
         <Container className="controls position-absolute p-4">
+          <BrightnessBar
+            brightness={brightness}
+            onBrightnessChange={(brightness) => this.tv.setTargetState('kh', parseInt(brightness, 10).toString(16))}
+            inflight={inflight}
+            disabled={!powerOn} />
+
           <VolumeBar
             volume={volume}
             onVolumeChange={(volume) => this.tv.setTargetState('kf', parseInt(volume, 10).toString(16))}

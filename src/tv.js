@@ -60,6 +60,10 @@ class TV {
     if (command === 'f') {
       return this.onStateChange({ volume: parseInt(value, 16) });
     }
+
+    if (command === 'h') {
+      return this.onStateChange({ brightness: parseInt(value, 16) });
+    }
   }
 
   setTargetState(command, value) {
