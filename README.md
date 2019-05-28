@@ -1,6 +1,6 @@
 # lg-controller
 
-WiFi-connected serial port LG television controller with mobile web frontend.
+WiFi-connected LG television RS-232 controller with mobile web frontend.
 
 For a list of LG RS-232 control commands, check your user manual or find one [online](https://www.lg.com/us/commercial/documents/47wv30bs-owner-manual.pdf).
 
