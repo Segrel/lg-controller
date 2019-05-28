@@ -1,3 +1,23 @@
+# lg-controller
+
+WiFi-connected serial port LG television controller with mobile web frontend.
+
+For a list of LG RS-232 control commands, check your user manual or find one [online](https://www.lg.com/us/commercial/documents/47wv30bs-owner-manual.pdf).
+
+## Setup
+
+You need to put Wifi credentials to `Server/env.h`:
+```
+#define WIFI_SSID "ssid"
+#define WIFI_PASSWORD "pass"
+```
+
+You also must build the static assets, see scripts below.
+
+## Usage
+
+On a Bonjour enabled environment, just navigate your browser to `lg-controller.local`. Otherwise check Serial output of the board for IP. Web UI is home screen icon compatible for mobile.
+
 ## Available Scripts
 
 In the project directory, you can run:
