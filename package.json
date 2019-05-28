@@ -13,8 +13,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "dist": "awot-static",
     "build-dist": "npm run build && npm run dist",
     "fakeserver": "npx nodemon FakeServer"
@@ -39,10 +37,10 @@
   "awot-static": {
     "sources": "./build",
     "indexFile": "index.html",
-    "sketchDir": "./ArduinoServer",
+    "sketchDir": "./Server",
     "exclude": [
       "*.map",
-      "service-worker.js"
+      "serviceWorker.js"
     ]
   }
 }
