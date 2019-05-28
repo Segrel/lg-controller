@@ -16,6 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dist": "awot-static",
+    "build-dist": "npm run build && npm run dist",
     "fakeserver": "npx nodemon FakeServer"
   },
   "eslintConfig": {
