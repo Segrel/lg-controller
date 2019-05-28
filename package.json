@@ -38,7 +38,7 @@
   "awot-static": {
     "sources": "./build",
     "indexFile": "index.html",
-    "sketchDir": "./LgServer",
+    "sketchDir": "./ArduinoServer",
     "exclude": [
       "*.map",
       "service-worker.js"
