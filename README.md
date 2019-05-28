@@ -1,6 +1,6 @@
 # lg-controller
 
-WiFi-connected LG television RS-232 controller with mobile web frontend.
+WiFi-connected LG TV RS-232 controller with web frontend. Made for ESP32.
 
 For a list of LG RS-232 control commands, check your user manual or find one [online](https://www.lg.com/us/commercial/documents/47wv30bs-owner-manual.pdf).
 
@@ -24,7 +24,7 @@ In the project directory, you can run:
 
 ### `npm run fakeserver`
 
-Starts up `FakeServer` with nodemon. FakeServer currently only supports certain commands and should be considered a template to build from, not a complete implementation.
+Starts up `FakeServer` with nodemon to port 5000. FakeServer currently only supports certain commands and should be considered a template to build from, not a complete implementation.
 
 ### `npm run build-dist`
 
