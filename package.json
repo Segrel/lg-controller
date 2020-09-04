@@ -31,7 +31,7 @@
     "body-parser": "1.18.3",
     "express": "4.16.4",
     "morgan": "1.9.1",
-    "node-sass": "4.11.0"
+    "node-sass": "4.13.1"
   },
   "proxy": "http://localhost:5000",
   "awot-static": {
