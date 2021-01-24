@@ -1,10 +1,11 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include "aWOT.h"
+#include "StaticFiles.h"
 #include "env.h"
 
 WiFiServer server(80);
-WebApp app;
+Application app;
 
 String sendCommand(String command, boolean retry) {
   String ack;
@@ -32,11 +33,11 @@ void handleCommandRequest(Request &req, Response &res) {
   ack = sendCommand(command, true);
 
   if (ack.length() == 0) {
-    res.fail();
+    res.sendStatus(400);
     return;
   }
 
-  res.success("text/plain");
+  res.set("Content-Type", "text/plain");
   res.print(ack);
 }
 
