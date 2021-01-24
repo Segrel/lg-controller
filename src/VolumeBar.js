@@ -48,8 +48,9 @@ class VolumeBar extends Component {
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                className="custom-range"
+                custom
                 type="range"
+                className="form-control"
                 step="1"
                 min="0"
                 max="32"

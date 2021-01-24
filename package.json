@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "4.3.1",
-    "bootswatch": "4.3.1",
-    "react": "^16.8.3",
-    "react-bootstrap": "1.0.0-beta.5",
-    "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "bootstrap": "4.5.0",
+    "bootswatch": "4.5.0",
+    "react": "17.0.1",
+    "react-bootstrap": "1.4.3",
+    "react-dom": "17.0.1",
+    "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,11 +27,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "awot-scripts": "0.0.24",
-    "body-parser": "1.18.3",
-    "express": "4.16.4",
-    "morgan": "1.9.1",
-    "node-sass": "4.11.0"
+    "awot-scripts": "3.1.1",
+    "body-parser": "1.19.0",
+    "express": "4.17.1",
+    "morgan": "1.10.0",
+    "sass": "^1.32.5"
   },
   "proxy": "http://localhost:5000",
   "awot-static": {
