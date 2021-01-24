@@ -2,7 +2,9 @@
 
 WiFi-connected LG TV RS-232 controller with web frontend. Made for ESP32.
 
-For a list of LG RS-232 control commands, check your user manual or find one [online](https://www.lg.com/us/commercial/documents/47wv30bs-owner-manual.pdf).
+![Screenshot at da0ac315d773099960e0e75eef9c905954ab376b](screenshot.png)
+
+For a list of LG RS-232 control commands, check your user manual or find one [online](https://www.lg.com/us/business/download/resources/BT00001837/UV340C-U_Install_Manual_170825.pdf).
 
 ## Setup
 
